@@ -173,7 +173,7 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
         moveBlankBrick(DIRECTION_UP, false);
         moveBlankBrick(DIRECTION_RIGHT, false);
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 50; i++) {
             int d = (int) (Math.random() * 4);
             switch (d) {
                 case 0:
