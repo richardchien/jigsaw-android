@@ -172,6 +172,24 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
         moveBlankBrick(DIRECTION_UP, false);
         moveBlankBrick(DIRECTION_UP, false);
         moveBlankBrick(DIRECTION_RIGHT, false);
+
+        for (int i = 0; i < 30; i++) {
+            int d = (int) (Math.random() * 4);
+            switch (d) {
+                case 0:
+                    moveBlankBrick(DIRECTION_UP, false);
+                    break;
+                case 1:
+                    moveBlankBrick(DIRECTION_DOWN, false);
+                    break;
+                case 2:
+                    moveBlankBrick(DIRECTION_LEFT, false);
+                    break;
+                case 3:
+                    moveBlankBrick(DIRECTION_RIGHT, false);
+                    break;
+            }
+        }
     }
 
     private boolean moveBlankBrick(int direction, boolean shouldNotifyView) {

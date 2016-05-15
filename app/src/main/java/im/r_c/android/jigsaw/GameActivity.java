@@ -33,15 +33,17 @@ import me.drakeet.mailotto.OnMailReceived;
  */
 public class GameActivity extends AppCompatActivity {
     private static final String TAG = "GameActivity";
-    public static final int ROW_COUNT = 3;
+    public static final int SPAN_COUNT = 3;
     public static final int BLANK_BRICK = 8;
+//    public static final int BLANK_BRICK = 3;
     public static final int[][] GOAL_STATUS = {{0, 1, 2}, {3, 4, 5}, {6, 7, BLANK_BRICK}};
+//    public static final int[][] GOAL_STATUS = {{0, 1}, {2, BLANK_BRICK}};
     public static final int MAIL_GAME_STARTED = 100;
     public static final int MAIL_STEP_MOVED = 101;
     public static final int MAIL_GAME_WON = 102;
 
     private Bitmap mFullBitmap = null;
-    private Bitmap[] mBitmapBricks = new Bitmap[ROW_COUNT * ROW_COUNT];
+    private Bitmap[] mBitmapBricks = new Bitmap[SPAN_COUNT * SPAN_COUNT];
     private Handler mHandler = new Handler();
     private Timer mTimer = null;
     private long mStartTime = 0;
@@ -116,7 +118,7 @@ public class GameActivity extends AppCompatActivity {
                     false);
 
             cutBitmapIntoPieces();
-            mBitmapBricks[ROW_COUNT * ROW_COUNT - 1] = BitmapFactory.decodeResource(getResources(), R.drawable.blank_brick);
+            mBitmapBricks[SPAN_COUNT * SPAN_COUNT - 1] = BitmapFactory.decodeResource(getResources(), R.drawable.blank_brick);
 
             startNewGame();
         } catch (FileNotFoundException e) {
@@ -129,11 +131,11 @@ public class GameActivity extends AppCompatActivity {
 
     private void cutBitmapIntoPieces() {
         int dividerWidth = (int) getResources().getDimension(R.dimen.brick_divider_width);
-        int brickWidth = (mFullBitmap.getWidth() - dividerWidth * (ROW_COUNT - 1)) / ROW_COUNT;
-        int brickHeight = (mFullBitmap.getHeight() - dividerWidth * (ROW_COUNT - 1)) / ROW_COUNT;
-        for (int i = 0; i < ROW_COUNT; i++) {
-            for (int j = 0; j < ROW_COUNT; j++) {
-                mBitmapBricks[i * ROW_COUNT + j] = Bitmap.createBitmap(
+        int brickWidth = (mFullBitmap.getWidth() - dividerWidth * (SPAN_COUNT - 1)) / SPAN_COUNT;
+        int brickHeight = (mFullBitmap.getHeight() - dividerWidth * (SPAN_COUNT - 1)) / SPAN_COUNT;
+        for (int i = 0; i < SPAN_COUNT; i++) {
+            for (int j = 0; j < SPAN_COUNT; j++) {
+                mBitmapBricks[i * SPAN_COUNT + j] = Bitmap.createBitmap(
                         mFullBitmap,
                         j * (brickWidth + dividerWidth),
                         i * (brickHeight + dividerWidth),
