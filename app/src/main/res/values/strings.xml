@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">J 拼图</string>
+    <string name="time_count">计时</string>
+    <string name="step_count">步数</string>
+    <string name="change_picture">换张图片</string>
+    <string name="restart">重新开始</string>
+    <string name="look_up_original_picture">查看原图</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
