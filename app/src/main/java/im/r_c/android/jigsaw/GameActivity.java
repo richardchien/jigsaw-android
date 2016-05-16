@@ -1,6 +1,7 @@
 package im.r_c.android.jigsaw;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,9 +37,9 @@ public class GameActivity extends AppCompatActivity {
     private static final String TAG = "GameActivity";
     public static final int SPAN_COUNT = 3;
     public static final int BLANK_BRICK = 8;
-//    public static final int BLANK_BRICK = 3;
+    //    public static final int BLANK_BRICK = 3;
     public static final int[][] GOAL_STATUS = {{0, 1, 2}, {3, 4, 5}, {6, 7, BLANK_BRICK}};
-//    public static final int[][] GOAL_STATUS = {{0, 1}, {2, BLANK_BRICK}};
+    //    public static final int[][] GOAL_STATUS = {{0, 1}, {2, BLANK_BRICK}};
     public static final int MAIL_GAME_STARTED = 100;
     public static final int MAIL_STEP_MOVED = 101;
     public static final int MAIL_GAME_WON = 102;
@@ -211,7 +213,10 @@ public class GameActivity extends AppCompatActivity {
                         .beginTransaction()
                         .replace(R.id.fl_board_container, WinFragment.newInstance(mFullBitmap))
                         .commit();
-                UIUtils.toast(GameActivity.this, "You won!", true);
+                UIUtils.toast(
+                        GameActivity.this,
+                        String.format(getString(R.string.win_prompt_format), mTvTime.getText().toString(), mTvStep.getText().toString()),
+                        true);
             }
         }, 500);
     }
@@ -221,15 +226,38 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void restart(View view) {
-        startNewGame();
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.restart))
+                .setMessage(getString(R.string.confirm_restart_msg))
+                .setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startNewGame();
+                    }
+                })
+                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     public void lookUpOriginalPicture(View view) {
         View alertView = View.inflate(this, R.layout.dialog_loop_up, null);
         ImageView imageView = (ImageView) alertView.findViewById(R.id.iv_image);
         imageView.setImageBitmap(mFullBitmap);
-        new AlertDialog.Builder(this)
+        final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(alertView)
-                .show();
+                .create();
+        alertView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                dialog.dismiss();
+                return true;
+            }
+        });
+        dialog.show();
     }
 }

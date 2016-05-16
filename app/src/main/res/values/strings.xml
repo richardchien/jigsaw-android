@@ -5,7 +5,10 @@
     <string name="change_picture">换张图片</string>
     <string name="restart">重新开始</string>
     <string name="look_up_original_picture">查看原图</string>
+    <string name="win_prompt_format">你赢了! 用时 %1$s, 走了 %2$s 步.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_image_trans">image transition name</string>
+    <string name="confirm_restart_msg">你确定要重新开始吗? 当前游戏进度会消失哦~</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
 </resources>

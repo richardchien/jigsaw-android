@@ -118,6 +118,7 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
 
                     if (!mMovedOnTouch || direction == -mLastDirection) {
                         moveBlankBrick(direction, true);
+                        handleMoved();
                         mLastDirection = direction;
                         mMovedOnTouch = true;
                         mLastX = rawX;
@@ -126,10 +127,7 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                if (mMovedOnTouch) {
-                    handleMoved();
-                    mMovedOnTouch = false;
-                }
+                mMovedOnTouch = false;
                 break;
         }
         return false;
@@ -173,7 +171,8 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
         moveBlankBrick(DIRECTION_UP, false);
         moveBlankBrick(DIRECTION_RIGHT, false);
 
-        for (int i = 0; i < 50; i++) {
+        int count = (int) (30 + Math.random() * 20);
+        for (int i = 0; i < count; i++) {
             int d = (int) (Math.random() * 4);
             switch (d) {
                 case 0:
