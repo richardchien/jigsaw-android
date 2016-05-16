@@ -28,7 +28,6 @@ public class ChooseActivity extends AppCompatActivity {
 
     private Uri[] mUris = new Uri[mResIds.length];
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

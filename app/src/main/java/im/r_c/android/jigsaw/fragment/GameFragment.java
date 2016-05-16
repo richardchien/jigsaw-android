@@ -70,7 +70,6 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
         return view;
     }
 
-    @SuppressWarnings("unchecked")
     private void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_bricks);
         assert mRecyclerView != null;
