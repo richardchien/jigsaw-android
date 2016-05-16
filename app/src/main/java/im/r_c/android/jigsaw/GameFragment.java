@@ -117,12 +117,13 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
                     }
 
                     if (!mMovedOnTouch || direction == -mLastDirection) {
-                        moveBlankBrick(direction, true);
-                        handleMoved();
-                        mLastDirection = direction;
-                        mMovedOnTouch = true;
-                        mLastX = rawX;
-                        mLastY = rawY;
+                        if (moveBlankBrick(direction, true)) {
+                            handleMoved();
+                            mLastDirection = direction;
+                            mMovedOnTouch = true;
+                            mLastX = rawX;
+                            mLastY = rawY;
+                        }
                     }
                 }
                 break;
@@ -165,13 +166,8 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
         if (mCurrBlankPos.x == -1 || mCurrBlankPos.y == -1) {
             return;
         }
-        moveBlankBrick(DIRECTION_UP, false);
-        moveBlankBrick(DIRECTION_LEFT, false);
-        moveBlankBrick(DIRECTION_UP, false);
-        moveBlankBrick(DIRECTION_UP, false);
-        moveBlankBrick(DIRECTION_RIGHT, false);
 
-        int count = (int) (30 + Math.random() * 20);
+        int count = (int) (40 + Math.random() * 10);
         for (int i = 0; i < count; i++) {
             int d = (int) (Math.random() * 4);
             switch (d) {
@@ -209,11 +205,6 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
         int tInt = mCurrStatus[p.y][p.x];
         mCurrStatus[p.y][p.x] = mCurrStatus[newY][newX];
         mCurrStatus[newY][newX] = tInt;
-//        int oldPos = p.y * mSpanCount + p.x;
-//        int newPos = newY * mSpanCount + newX;
-//        Bitmap tBitmap = mBitmapBricks[oldPos];
-//        mBitmapBricks[oldPos] = mBitmapBricks[newPos];
-//        mBitmapBricks[newPos] = tBitmap;
 
         if (shouldNotifyView) {
             int posA = p.y * mSpanCount + p.x;
