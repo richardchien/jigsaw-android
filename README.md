@@ -6,5 +6,5 @@ This is a jigsaw game for Android.
 
 - [x] Add built-in pictures
 - [x] Add prompts when click some buttons
-- [ ] App icon
+- [x] App icon
 - [ ] Sound
