@@ -71,9 +71,9 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
     private void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_bricks);
         assert mRecyclerView != null;
-        mRecyclerView.setAdapter(new CommonRecyclerViewAdapter(getContext(), mBitmapBricks, R.layout.brick_item) {
+        mRecyclerView.setAdapter(new CommonRecyclerViewAdapter<Bitmap>(getContext(), mBitmapBricks, R.layout.brick_item) {
             @Override
-            public void onItemViewAppear(ViewHolder holder, Object o, int position) {
+            public void onItemViewAppear(ViewHolder holder, Bitmap bitmap, int position) {
                 int row = position / mSpanCount;
                 int column = position % mSpanCount;
                 holder.setViewImageBitmap(R.id.iv_brick, mBitmapBricks[mCurrStatus[row][column]]);

@@ -4,7 +4,7 @@ This is a jigsaw game for Android.
 
 ## TODO
 
-- [ ] Add built-in pictures
-- [ ] Celebration after winning
+- [x] Add built-in pictures
 - [x] Add prompts when click some buttons
 - [ ] App icon
+- [ ] Sound

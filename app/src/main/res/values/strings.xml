@@ -6,9 +6,13 @@
     <string name="restart">重新开始</string>
     <string name="look_up_original_picture">查看原图</string>
     <string name="win_prompt_format">你赢了! 用时 %1$s, 走了 %2$s 步.</string>
-
-    <string name="fragment_image_trans">image transition name</string>
     <string name="confirm_restart_msg">你确定要重新开始吗? 当前游戏进度会消失哦~</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <string name="choose_picture_to_start">点击这里选择一张图片开始游戏</string>
+    <string name="choose_from_gallery">从相册选择</string>
+
+    <string name="bottom_button_trans_name">bottom button trans</string>
+    <string name="crop">裁剪</string>
+    <string name="not_started">你还没有开始哦~</string>
 </resources>

@@ -5,16 +5,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -43,6 +47,7 @@ public class GameActivity extends AppCompatActivity {
     public static final int MAIL_GAME_STARTED = 100;
     public static final int MAIL_STEP_MOVED = 101;
     public static final int MAIL_GAME_WON = 102;
+    public static final int REQUEST_CODE_CHOOSE_PICTURE = 200;
 
     private Bitmap mFullBitmap = null;
     private Bitmap[] mBitmapBricks = new Bitmap[SPAN_COUNT * SPAN_COUNT];
@@ -53,18 +58,26 @@ public class GameActivity extends AppCompatActivity {
 
     private TextView mTvTime;
     private TextView mTvStep;
+    private Button mBtnChooseAndStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            window.setEnterTransition(new Explode());
+            window.setExitTransition(new Explode());
+        }
         setContentView(R.layout.activity_game);
 
         mTvTime = (TextView) findViewById(R.id.tv_time);
         mTvStep = (TextView) findViewById(R.id.tv_step);
+        mBtnChooseAndStart = (Button) findViewById(R.id.btn_choose_and_start);
 
         Mailbox.getInstance().atHome(this);
 
-        startActivityForNewPicture();
+//        startActivityForNewPicture();
     }
 
     @Override
@@ -74,39 +87,37 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startActivityForNewPicture() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE);
+        Intent intent = new Intent(this, ChooseActivity.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivityForResult(
+                    intent, REQUEST_CODE_CHOOSE_PICTURE,
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            this,
+                            findViewById(R.id.btn_change_picture),
+                            getString(R.string.bottom_button_trans_name)).toBundle());
+        } else {
+            startActivityForResult(intent, REQUEST_CODE_CHOOSE_PICTURE);
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE: {
+            case REQUEST_CODE_CHOOSE_PICTURE:
                 if (resultCode == RESULT_OK) {
-                    CropImage.activity(data.getData())
-                            .setActivityTitle("裁剪")
-                            .setAspectRatio(1, 1)
-                            .setFixAspectRatio(true)
-                            .start(this);
+                    handleChooseResult(data.getData());
                 }
                 break;
-            }
-            case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE: {
-                if (resultCode == RESULT_OK) {
-                    CropImage.ActivityResult result = CropImage.getActivityResult(data);
-                    handleCropResult(result);
-                }
-                break;
-            }
         }
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void handleCropResult(CropImage.ActivityResult result) {
+    private void handleChooseResult(Uri uri) {
         try {
-            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(result.getUri()));
+            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+
+            // Delete the cache file CropImage generated
+            IOUtils.deleteFile(uri.getPath());
 
             // Scale the bitmap to a proper size, avoiding waste of memory
             View container = findViewById(R.id.fl_board_container);
@@ -126,9 +137,6 @@ public class GameActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        // Delete the cache file CropImage generated
-        IOUtils.deleteFile(result.getUri().getPath());
     }
 
     private void cutBitmapIntoPieces() {
@@ -147,6 +155,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startNewGame() {
+        mBtnChooseAndStart.setVisibility(View.GONE);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fl_board_container, GameFragment.newInstance(mBitmapBricks, GOAL_STATUS))
@@ -226,6 +235,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void restart(View view) {
+        if (mFullBitmap == null) {
+            // Not started, so cannot restart
+            UIUtils.toast(this, getString(R.string.not_started));
+            return;
+        }
+
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.restart))
                 .setMessage(getString(R.string.confirm_restart_msg))
@@ -245,6 +260,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void lookUpOriginalPicture(View view) {
+        if (mFullBitmap == null) {
+            // Not started, so cannot restart
+            UIUtils.toast(this, getString(R.string.not_started));
+            return;
+        }
+
         View alertView = View.inflate(this, R.layout.dialog_loop_up, null);
         ImageView imageView = (ImageView) alertView.findViewById(R.id.iv_image);
         imageView.setImageBitmap(mFullBitmap);
@@ -259,5 +280,9 @@ public class GameActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    public void chooseAndStart(View view) {
+        startActivityForNewPicture();
     }
 }

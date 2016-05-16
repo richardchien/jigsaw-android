@@ -12,55 +12,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".GameActivity">
 
-    <RelativeLayout
+    <include
+        layout="@layout/game_top"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical">
-
-        <TextView
-            style="@style/TextView.Title"
-            android:layout_alignBottom="@+id/ll_label_time"
-            android:layout_alignTop="@+id/ll_label_time"
-            android:layout_marginLeft="@dimen/title_margin_left"
-            android:layout_marginStart="@dimen/title_margin_left"
-            android:gravity="center_vertical"
-            android:text="@string/app_name"/>
-
-        <LinearLayout
-            android:id="@+id/ll_label_time"
-            style="@style/LabelLayout"
-            android:layout_marginEnd="@dimen/label_margin"
-            android:layout_marginRight="@dimen/label_margin"
-            android:layout_toLeftOf="@+id/ll_label_step"
-            android:layout_toStartOf="@+id/ll_label_step">
-
-            <TextView
-                style="@style/TextView.Label"
-                android:text="@string/time_count"/>
-
-            <TextView
-                android:id="@+id/tv_time"
-                style="@style/TextView.LabelSecondary"
-                android:text="12:11"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_label_step"
-            style="@style/LabelLayout"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true">
-
-            <TextView
-                style="@style/TextView.Label"
-                android:text="@string/step_count"/>
-
-            <TextView
-                android:id="@+id/tv_step"
-                style="@style/TextView.LabelSecondary"
-                android:text="26"/>
-        </LinearLayout>
-    </RelativeLayout>
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,36 +30,22 @@
             android:layout_height="match_parent"
             android:background="@drawable/board_background"
             android:padding="@dimen/board_padding">
+
+            <Button
+                android:id="@+id/btn_choose_and_start"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:background="@android:color/transparent"
+                android:onClick="chooseAndStart"
+                android:text="@string/choose_picture_to_start"/>
         </im.r_c.android.jigsaw.SquareFrameLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <include
+        layout="@layout/game_bottom"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <Button
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="changePicture"
-            android:text="@string/change_picture"
-            tools:ignore="NestedWeights"/>
-
-        <Button
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="restart"
-            android:text="@string/restart"/>
-
-        <Button
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="lookUpOriginalPicture"
-            android:text="@string/look_up_original_picture"/>
-    </LinearLayout>
+        android:layout_weight="1"/>
 </LinearLayout>
