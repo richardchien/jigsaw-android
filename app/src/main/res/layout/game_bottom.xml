@@ -8,13 +8,11 @@
     android:orientation="horizontal">
 
     <Button
-        android:id="@+id/btn_change_picture"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:onClick="changePicture"
         android:text="@string/change_picture"
-        android:transitionName="@string/bottom_button_trans_name"
         tools:ignore="NestedWeights"/>
 
     <Button
