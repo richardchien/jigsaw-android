@@ -1,4 +1,4 @@
-package im.r_c.android.jigsaw;
+package im.r_c.android.jigsaw.fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import im.r_c.android.jigsaw.R;
 
 /**
  * Jigsaw

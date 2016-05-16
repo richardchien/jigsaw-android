@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".GameActivity">
+    tools:context=".activity.GameActivity">
 
     <include
         layout="@layout/game_top"
@@ -24,7 +24,7 @@
         android:layout_weight="5"
         android:gravity="center">
 
-        <im.r_c.android.jigsaw.SquareFrameLayout
+        <im.r_c.android.jigsaw.view.SquareFrameLayout
             android:id="@+id/fl_board_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -40,7 +40,7 @@
                 android:background="@android:color/transparent"
                 android:onClick="chooseAndStart"
                 android:text="@string/choose_picture_to_start"/>
-        </im.r_c.android.jigsaw.SquareFrameLayout>
+        </im.r_c.android.jigsaw.view.SquareFrameLayout>
     </LinearLayout>
 
     <include

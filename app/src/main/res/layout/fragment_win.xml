@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="im.r_c.android.jigsaw.WinFragment">
+             tools:context=".fragment.WinFragment">
 
     <ImageView
         android:id="@+id/iv_image"

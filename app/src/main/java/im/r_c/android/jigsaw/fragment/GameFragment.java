@@ -1,4 +1,4 @@
-package im.r_c.android.jigsaw;
+package im.r_c.android.jigsaw.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.Point;
@@ -15,7 +15,10 @@ import java.util.Arrays;
 
 import im.r_c.android.commonrecyclerviewadapter.CommonRecyclerViewAdapter;
 import im.r_c.android.commonrecyclerviewadapter.ViewHolder;
+import im.r_c.android.jigsaw.R;
+import im.r_c.android.jigsaw.activity.GameActivity;
 import im.r_c.android.jigsaw.util.DensityUtils;
+import im.r_c.android.jigsaw.view.SquareGridSpacingItemDecoration;
 import me.drakeet.mailotto.Mail;
 import me.drakeet.mailotto.Mailbox;
 
@@ -42,12 +45,12 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
     public GameFragment() {
     }
 
-    private int mSpanCount = 0;
-    private Bitmap[] mBitmapBricks = null;
-    private int[][] mGoalStatus = null;
-    private int[][] mCurrStatus = null;
-    private Point mCurrBlankPos = null;
-    private RecyclerView mRecyclerView = null;
+    private int mSpanCount;
+    private Bitmap[] mBitmapBricks;
+    private int[][] mGoalStatus;
+    private int[][] mCurrStatus;
+    private Point mCurrBlankPos;
+    private RecyclerView mRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -163,27 +166,31 @@ public class GameFragment extends Fragment implements View.OnTouchListener {
     }
 
     private void generateRandomStatus() {
-        if (mCurrBlankPos.x == -1 || mCurrBlankPos.y == -1) {
-            return;
-        }
-
-        int count = (int) (40 + Math.random() * 10);
+        int count = (int) (40 + Math.random() * 20);
+        int lastD = -1;
         for (int i = 0; i < count; i++) {
-            int d = (int) (Math.random() * 4);
+            int d;
+            do {
+                d = (int) (Math.random() * 4);
+            } while (lastD == d);
+            lastD = d;
+
+            int direction = 0;
             switch (d) {
                 case 0:
-                    moveBlankBrick(DIRECTION_UP, false);
+                    direction = DIRECTION_UP;
                     break;
                 case 1:
-                    moveBlankBrick(DIRECTION_DOWN, false);
+                    direction = DIRECTION_DOWN;
                     break;
                 case 2:
-                    moveBlankBrick(DIRECTION_LEFT, false);
+                    direction = DIRECTION_LEFT;
                     break;
                 case 3:
-                    moveBlankBrick(DIRECTION_RIGHT, false);
+                    direction = DIRECTION_RIGHT;
                     break;
             }
+            moveBlankBrick(direction, false);
         }
     }
 

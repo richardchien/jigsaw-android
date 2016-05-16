@@ -1,4 +1,4 @@
-package im.r_c.android.jigsaw;
+package im.r_c.android.jigsaw.activity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +25,10 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import im.r_c.android.jigsaw.App;
+import im.r_c.android.jigsaw.fragment.GameFragment;
+import im.r_c.android.jigsaw.R;
+import im.r_c.android.jigsaw.fragment.WinFragment;
 import im.r_c.android.jigsaw.util.IOUtils;
 import im.r_c.android.jigsaw.util.L;
 import im.r_c.android.jigsaw.util.UIUtils;
@@ -41,24 +44,22 @@ public class GameActivity extends AppCompatActivity {
     private static final String TAG = "GameActivity";
     public static final int SPAN_COUNT = 3;
     public static final int BLANK_BRICK = 8;
-    //    public static final int BLANK_BRICK = 3;
     public static final int[][] GOAL_STATUS = {{0, 1, 2}, {3, 4, 5}, {6, 7, BLANK_BRICK}};
-    //    public static final int[][] GOAL_STATUS = {{0, 1}, {2, BLANK_BRICK}};
     public static final int MAIL_GAME_STARTED = 100;
     public static final int MAIL_STEP_MOVED = 101;
     public static final int MAIL_GAME_WON = 102;
     public static final int REQUEST_CODE_CHOOSE_PICTURE = 200;
 
-    private Bitmap mFullBitmap = null;
+    private Bitmap mFullBitmap;
     private Bitmap[] mBitmapBricks = new Bitmap[SPAN_COUNT * SPAN_COUNT];
-    private Handler mHandler = new Handler();
-    private Timer mTimer = null;
-    private long mStartTime = 0;
-    private int mStepCount = 0;
+    private Timer mTimer;
+    private long mStartTime;
+    private int mStepCount;
 
     private TextView mTvTime;
     private TextView mTvStep;
     private Button mBtnChooseAndStart;
+    private GameFragment mGameFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +72,11 @@ public class GameActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_game);
 
+        Mailbox.getInstance().atHome(this);
+
         mTvTime = (TextView) findViewById(R.id.tv_time);
         mTvStep = (TextView) findViewById(R.id.tv_step);
         mBtnChooseAndStart = (Button) findViewById(R.id.btn_choose_and_start);
-
-        Mailbox.getInstance().atHome(this);
-
-//        startActivityForNewPicture();
     }
 
     @Override
@@ -215,7 +214,7 @@ public class GameActivity extends AppCompatActivity {
     private void onGameWon() {
         mTimer.cancel();
         mTimer.purge();
-        mHandler.postDelayed(new Runnable() {
+        App.getMainHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 getSupportFragmentManager()

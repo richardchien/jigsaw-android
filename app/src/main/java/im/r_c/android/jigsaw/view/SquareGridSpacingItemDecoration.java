@@ -1,4 +1,4 @@
-package im.r_c.android.jigsaw;
+package im.r_c.android.jigsaw.view;
 
 import android.content.Context;
 import android.graphics.Rect;

@@ -29,7 +29,7 @@
         <TextView
             android:id="@+id/tv_time"
             style="@style/TextView.LabelSecondary"
-            android:text="12:11"/>
+            android:text="@string/default_time"/>
     </LinearLayout>
 
     <LinearLayout
@@ -45,6 +45,6 @@
         <TextView
             android:id="@+id/tv_step"
             style="@style/TextView.LabelSecondary"
-            android:text="26"/>
+            android:text="@string/default_step"/>
     </LinearLayout>
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package im.r_c.android.jigsaw;
+package im.r_c.android.jigsaw.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +12,9 @@ import com.theartofdev.edmodo.cropper.CropImage;
 
 import im.r_c.android.commonrecyclerviewadapter.CommonRecyclerViewAdapter;
 import im.r_c.android.commonrecyclerviewadapter.ViewHolder;
-import im.r_c.android.jigsaw.util.IOUtils;
+import im.r_c.android.jigsaw.R;
+import im.r_c.android.jigsaw.util.ResUtils;
+import im.r_c.android.jigsaw.view.SquareGridSpacingItemDecoration;
 
 public class ChooseActivity extends AppCompatActivity {
     private static final String TAG = "ChooseActivity";
@@ -33,7 +35,7 @@ public class ChooseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose);
 
         for (int i = 0; i < mResIds.length; i++) {
-            mUris[i] = IOUtils.getUriOfResource(this, mResIds[i]);
+            mUris[i] = ResUtils.getUriOfResource(this, mResIds[i]);
         }
 
         initView();
