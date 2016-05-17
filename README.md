@@ -8,10 +8,10 @@
 
 ## Screenshots
 
-![shot1](http://7xqspp.com1.z0.glb.clouddn.com/16-5-17/39487083.jpg)
+![shot1](http://7xqspp.com1.z0.glb.clouddn.com/16-5-17/39487083.jpg =320x)
 
-![shot2](http://7xqspp.com1.z0.glb.clouddn.com/16-5-17/57845332.jpg)
+![shot2](http://7xqspp.com1.z0.glb.clouddn.com/16-5-17/57845332.jpg =320x)
 
-![shot3](http://7xqspp.com1.z0.glb.clouddn.com/16-5-17/4183348.jpg)
+![shot3](http://7xqspp.com1.z0.glb.clouddn.com/16-5-17/4183348.jpg =320x)
 
-![shot4](http://7xqspp.com1.z0.glb.clouddn.com/16-5-17/97517939.jpg)
+![shot4](http://7xqspp.com1.z0.glb.clouddn.com/16-5-17/97517939.jpg =320x)
