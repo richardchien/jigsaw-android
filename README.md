@@ -1,6 +1,8 @@
-# Jigsaw for Android
+# Jigsaw for Android v1.0.x
 
 This is a jigsaw game for Android.
+
+Current branch version: v1.0.0, version code: 2.
 
 ## TODO
 
