@@ -10,3 +10,4 @@ Current branch version: v1.0.0, version code: 2.
 - [x] Add prompts when click some buttons
 - [x] App icon
 - [ ] Sound
+- [ ] Improve random algorithm
