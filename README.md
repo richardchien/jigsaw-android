@@ -1,6 +1,6 @@
 # Jigsaw (J 拼图) for Android
 
-<img src="./Images/Icons/512 - Play Store.png">
+<img src="./Images/Icons/1024x500 Play Store.png">
 
 这是一个简易的拼图游戏，玩家可以选择内置的或自己相册中的图片开始游戏，游戏将记录玩家完成所花时间以及移动的步数。
 
@@ -9,9 +9,7 @@
 ## Screenshots
 
 <img src="./Images/Screenshots/Screenshot_20160516-180600.jpg" width="320">
-
 <img src="./Images/Screenshots/Screenshot_20160517-003819.jpg" width="320">
 
 <img src="./Images/Screenshots/Screenshot_20160517-003840.jpg" width="320">
-
 <img src="./Images/Screenshots/Screenshot_20160517-003845.jpg" width="320">
