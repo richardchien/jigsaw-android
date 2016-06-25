@@ -1,6 +1,6 @@
 # Jigsaw (J 拼图) for Android
 
-[![License](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]()
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](LICENSE)
 
 <img src="./Images/Icons/1024x500 Play Store.png">
 
