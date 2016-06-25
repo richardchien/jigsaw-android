@@ -12,7 +12,6 @@
     <string name="choose_picture_to_start">ここをクリックして、開始するゲームの画像を選択してください</string>
     <string name="choose_from_gallery">ギャラリーから</string>
 
-    <string name="bottom_button_trans_name">bottom button trans</string>
     <string name="crop">トリミング</string>
     <string name="not_started">まだ開始していません</string>
     <string name="default_time">00:00</string>
