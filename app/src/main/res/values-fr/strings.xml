@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">J Puz</string>
+    <string name="time_count">Temps</string>
+    <string name="step_count">Mouvements</string>
+    <string name="change_picture">Changer d\'image</string>
+    <string name="restart">Recommencer</string>
+    <string name="look_up_original_picture">Image originale</string>
+    <string name="win_prompt_format">Vous avez gagné ! Temps %1$s, %2$s mouvements.</string>
+    <string name="confirm_restart_msg">Êtes vous sûr de vouloir recommencer ? L\'état de la partie sera perdu.</string>
+    <string name="confirm">Confirmer</string>
+    <string name="cancel">Annuler</string>
+    <string name="choose_picture_to_start">Cliquer ici pour démarrer le jeu</string>
+    <string name="choose_from_gallery">Choisir dans Galerie</string>
+
+    <string name="crop">Crop</string>
+    <string name="not_started">Vous n\'avez pas encore commencé.</string>
+    <string name="default_time">00:00</string>
+    <string name="default_step">0</string>
+</resources>
